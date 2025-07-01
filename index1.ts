@@ -1,4 +1,9 @@
 (() => {
+  type Pizza = {
+    name: string;
+    price: number;
+  };
+
   const menu = [
     { name: "Margherita", price: 8 },
     { name: "Pepperoni", price: 10 },
@@ -10,11 +15,11 @@
   let nextOderId: number = 1;
   let orderQueue = [];
 
-  function addNewPizza(pizzaObj) {
+  function addNewPizza(pizzaObj: Pizza) {
     menu.push(pizzaObj);
   }
 
-  function placeOrder(pizzaName) {
+  function placeOrder(pizzaName: string) {
     const selectedPizza = menu.find((pizzaObj) => pizzaObj.name === pizzaName);
     if (!selectedPizza) {
       console.error(`${pizzaName}... Sorry!, we don't have that pizza`);
