@@ -5,9 +5,9 @@ const menu = [
   { name: "Veggie", price: 4 },
 ];
 
-const cashInRegister = 100;
+let cashInRegister = 100;
+let nextOderId = 1;
 const orderQueue = [];
-const nextOderId = 1;
 function addNewPizza(pizzaObj) {
   menu.push(pizzaObj);
 }
