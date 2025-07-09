@@ -24,11 +24,11 @@ let cashInRegister: number = 100;
 let nextOderId: number = 1;
 let orderHistory: Order[] = [];
 
-function addNewPizza(pizzaObj: Pizza) {
+function addNewPizza(pizzaObj: Pizza): void {
   menu.push(pizzaObj);
 }
 
-function placeOrder(pizzaName: string) {
+function placeOrder(pizzaName: string): Order | undefined {
   const selectedPizza = menu.find((pizzaObj) => pizzaObj.name === pizzaName);
   if (!selectedPizza) {
     console.error(`${pizzaName}... Sorry!, we don't have that pizza`);
@@ -44,19 +44,19 @@ function placeOrder(pizzaName: string) {
   return newOrder;
 }
 
-function completeOrder(orderId: number) {
+function completeOrder(orderId: number): Order | undefined {
   const order = orderHistory.find((order) => order.id === orderId);
-  console.log("order i wanna look at", order);
+  // console.log("order i wanna look at", order);
   if (order) {
     order.status = "completed";
-    console.log("order status updated", order);
-    return order;
+    // console.log("order status updated", order);
+    return;
   }
   console.warn("Order not found");
-  return null;
+  return order;
 }
 
-function getPizza(identifier: string | number) {
+export function getPizza(identifier: string | number): Pizza | undefined {
   if (typeof identifier === "string") {
     return menu.find(
       (identifierObj) =>
