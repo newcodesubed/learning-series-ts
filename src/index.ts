@@ -3,7 +3,10 @@ type Pizza = {
   name: string;
   price: number;
 };
-
+type AddPizza = {
+  name: string;
+  price: number;
+};
 //unions
 type OrderStatus = "order" | "completed";
 
@@ -13,19 +16,24 @@ type Order = {
   status: OrderStatus;
 };
 
-const menu: Pizza[] = [
-  { id: 1, name: "Margherita", price: 8 },
-  { id: 2, name: "Pepperoni", price: 10 },
-  { id: 3, name: "Hawaiian", price: 3 },
-  { id: 4, name: "Veggie", price: 4 },
-];
-
 let cashInRegister: number = 100;
 let nextOderId: number = 1;
 let orderHistory: Order[] = [];
+let pizzaId: number = 1;
+const menu: Pizza[] = [
+  { id: pizzaId++, name: "Margherita", price: 8 },
+  { id: pizzaId++, name: "Pepperoni", price: 10 },
+  { id: pizzaId++, name: "Hawaiian", price: 3 },
+  { id: pizzaId++, name: "Veggie", price: 4 },
+];
 
-function addNewPizza(pizzaObj: Pizza): void {
-  menu.push(pizzaObj);
+function addNewPizza(pizzaObj: AddPizza): void {
+  const orderAdded: Pizza = {
+    id: pizzaId++,
+    name: pizzaObj.name,
+    price: pizzaObj.price,
+  };
+  menu.push(orderAdded);
 }
 
 function placeOrder(pizzaName: string): Order | undefined {
@@ -73,9 +81,9 @@ export function getPizza(identifier: string | number): Pizza | undefined {
 }
 
 // Demo
-addNewPizza({ id: 5, name: "BBQ chicken", price: 20 });
-addNewPizza({ id: 6, name: "smoked chicken", price: 22 });
-addNewPizza({ id: 7, name: "grill chicken", price: 12 });
+addNewPizza({ name: "My BBQ chicken", price: 200 });
+// addNewPizza({ id: 6, name: "smoked chicken", price: 22 });
+// addNewPizza({ id: 7, name: "grill chicken", price: 12 });
 
 placeOrder("BBQ chicken");
 completeOrder(1);
