@@ -56,6 +56,22 @@ function completeOrder(orderId: number) {
   return null;
 }
 
+function getPizza(identifier: string | number) {
+  if (typeof identifier === "string") {
+    return menu.find(
+      (identifierObj) =>
+        identifierObj?.name.toLocaleLowerCase() ===
+        identifier.toLocaleLowerCase()
+    );
+  } else if (typeof identifier === "number") {
+    return menu.find((identifierObj) => identifierObj?.id === identifier);
+  } else {
+    throw new TypeError(
+      "Parameter 'identifier' must be either string or number"
+    );
+  }
+}
+
 // Demo
 addNewPizza({ id: 5, name: "BBQ chicken", price: 20 });
 addNewPizza({ id: 6, name: "smoked chicken", price: 22 });
