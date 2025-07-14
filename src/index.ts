@@ -27,13 +27,13 @@ const menu: Pizza[] = [
   { id: pizzaId++, name: "Veggie", price: 4 },
 ];
 
-function addNewPizza(pizzaObj: AddPizza): void {
+function addNewPizza(pizzaObj: Omit<Pizza, "id">): Pizza {
   const orderAdded: Pizza = {
     id: pizzaId++,
-    name: pizzaObj.name,
-    price: pizzaObj.price,
+    ...pizzaObj,
   };
   menu.push(orderAdded);
+  return orderAdded;
 }
 
 function placeOrder(pizzaName: string): Order | undefined {
@@ -81,13 +81,13 @@ export function getPizza(identifier: string | number): Pizza | undefined {
 }
 
 // Demo
-addNewPizza({ name: "My BBQ chicken", price: 200 });
+addNewPizza({ name: "My BBQ chicken", price: 2000 });
 // addNewPizza({ id: 6, name: "smoked chicken", price: 22 });
 // addNewPizza({ id: 7, name: "grill chicken", price: 12 });
 
-placeOrder("BBQ chicken");
-completeOrder(1);
+// placeOrder("BBQ chicken");
+// completeOrder(1);
 
 console.log("Menu:", menu);
-console.log("Cash in register:", cashInRegister);
-console.log("Order Queue:", orderHistory);
+// console.log("Cash in register:", cashInRegister);
+// console.log("Order Queue:", orderHistory);
